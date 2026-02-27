@@ -1,0 +1,86 @@
+<!-- Add this to the end of your existing profile.html script section -->
+<script>
+    // Update the redirect in the form submit event
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Collect all form data
+        const profileData = {
+            driver: {
+                name: document.getElementById('driverName').value,
+                age: document.getElementById('driverAge').value,
+                phone: document.getElementById('driverPhone').value,
+                bloodGroup: document.getElementById('bloodGroup').value,
+                licenseNumber: document.getElementById('licenseNumber').value
+            },
+            vehicle: {
+                make: document.getElementById('vehicleMake').value,
+                model: document.getElementById('vehicleModel').value,
+                year: document.getElementById('vehicleYear').value,
+                color: document.getElementById('vehicleColor').value,
+                registrationNumber: document.getElementById('registrationNumber').value
+            },
+            emergencyContacts: {
+                primary: document.getElementById('emergencyContact1').value,
+                secondary: document.getElementById('emergencyContact2').value
+            }
+        };
+
+        // Store in localStorage
+        localStorage.setItem('safetyTechProfile', JSON.stringify(profileData));
+        
+        // Store session flag
+        localStorage.setItem('profileCompleted', 'true');
+        
+        // Show success message
+        alert('Profile saved successfully! Backend will use these details for emergency alerts.\n\nYour emergency contact: ' + profileData.emergencyContacts.primary);
+        
+        // Redirect to dashboard
+        window.location.href = 'dashboard.html';
+    });
+
+    // Auto-fill your number as primary contact
+    window.addEventListener('load', function() {
+        // Auto-fill your number
+        document.getElementById('emergencyContact1').value = '+919629042258';
+        
+        // Auto-fill sample data for testing
+        document.getElementById('driverName').value = 'Rajesh Kumar';
+        document.getElementById('driverAge').value = '35';
+        document.getElementById('driverPhone').value = '+919876543210';
+        document.getElementById('bloodGroup').value = 'O+';
+        document.getElementById('licenseNumber').value = 'DL12345678901234';
+        document.getElementById('vehicleMake').value = 'Toyota';
+        document.getElementById('vehicleModel').value = 'Fortuner Legender 4x4';
+        document.getElementById('vehicleYear').value = '2023';
+        document.getElementById('vehicleColor').value = 'Pearl White';
+        document.getElementById('registrationNumber').value = 'DL 8C AB 1234';
+        
+        // Check if profile already exists
+        const existingProfile = localStorage.getItem('safetyTechProfile');
+        if (existingProfile) {
+            const profile = JSON.parse(existingProfile);
+            // Auto-fill the form with existing data
+            Object.keys(profile.driver).forEach(key => {
+                const element = document.getElementById(key === 'name' ? 'driverName' : 
+                                                       key === 'age' ? 'driverAge' :
+                                                       key === 'phone' ? 'driverPhone' :
+                                                       key === 'bloodGroup' ? 'bloodGroup' : 'licenseNumber');
+                if (element) element.value = profile.driver[key];
+            });
+            
+            Object.keys(profile.vehicle).forEach(key => {
+                const element = document.getElementById(key === 'make' ? 'vehicleMake' :
+                                                       key === 'model' ? 'vehicleModel' :
+                                                       key === 'year' ? 'vehicleYear' :
+                                                       key === 'color' ? 'vehicleColor' : 'registrationNumber');
+                if (element) element.value = profile.vehicle[key];
+            });
+            
+            if (profile.emergencyContacts) {
+                document.getElementById('emergencyContact1').value = profile.emergencyContacts.primary || '';
+                document.getElementById('emergencyContact2').value = profile.emergencyContacts.secondary || '';
+            }
+        }
+    });
+</script>
