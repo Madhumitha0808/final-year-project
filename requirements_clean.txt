@@ -1,0 +1,44 @@
+# Core Audio Processing
+librosa==0.10.1
+soundfile==0.12.1
+pyaudio==0.2.14
+pydub==0.25.1
+webrtcvad==2.0.10
+
+# Computer Vision & Face Detection
+mediapipe==0.10.8
+opencv-python==4.9.0.80
+opencv-contrib-python==4.9.0.80
+Pillow==10.3.0
+
+# AI/ML Framework (Choose ONE based on your hardware)
+# TensorFlow (for GPU/CPU)
+tensorflow==2.13.0
+# OR PyTorch (alternative)
+# torch==2.0.1
+# torchvision==0.15.2
+
+# Sensor Data Processing
+numpy==1.24.3
+pandas==2.0.3
+scipy==1.11.1
+
+# Sensor Fusion & IMU Libraries (for accelerometer/gyroscope)
+pyserial==3.5
+smbus2==0.4.3
+adafruit-circuitpython-mpu6050==4.1.3  # For MPU6050 IMU
+
+# GPS/GNSS Support
+gpsd-py3==2.0.0
+geopy==2.4.1
+
+# Alert & Notification System
+twilio==8.10.0  # For SMS alerts
+smtplib  # Built-in for email
+requests==2.31.0  # For HTTP requests to APIs
+
+# Utilities
+python-dotenv==1.0.0  # For environment variables
+pytest==7.4.0  # For testing
+matplotlib==3.7.2  # For data visualization
+scikit-learn==1.3.0  # For ML models
